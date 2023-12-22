@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:heath_care_test/screens/login_page.dart';
-import 'package:heath_care_test/screens/sign_up.dart';
 
 class OnBoard extends StatefulWidget {
-
-  @override
   State<OnBoard> createState() => _OnBoardState();
 }
-
 class _OnBoardState extends State<OnBoard> {
   Widget dotPageView() {
     return Builder(builder: ((context) {
@@ -21,7 +17,8 @@ class _OnBoardState extends State<OnBoard> {
               height: 6,
               decoration: BoxDecoration(
                   color: i == pagenumber ? Colors.white : Colors.grey,
-                  borderRadius: BorderRadius.circular(50)),
+                  borderRadius: BorderRadius.circular(50)
+              ),
             ),
         ],
       );
@@ -29,13 +26,12 @@ class _OnBoardState extends State<OnBoard> {
   }
 
   PageController nextpage = PageController();
-
   int pagenumber = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: PageView(
         onPageChanged: (value) {
           setState(() {});
@@ -46,23 +42,25 @@ class _OnBoardState extends State<OnBoard> {
           Column(
             children: [
               SizedBox(
-                height: 60,
+                height: 40,
               ),
-              Image.asset(
-                "assets/images/414-bg.png",
-                width: 500.0,
-                height: 500.0,
+              Padding(
+                padding: const EdgeInsets.only(left: 60),
+                child: Image.asset(
+                  "assets/images/414-bg.png",
+                  width: 400.0,
+                  height: 400.0,
+                ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+
               Text(
                 "Health Tips",
                 style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Gilroy',
-                    color: Colors.white),
+                    color: Colors.black
+                ),
               ),
               SizedBox(
                 height: 15,
@@ -74,7 +72,8 @@ class _OnBoardState extends State<OnBoard> {
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Gilroy Pro',
-                    color: Colors.grey),
+                    color: Colors.black38
+                ),
               ),
               SizedBox(
                 height: 30,
@@ -89,52 +88,47 @@ class _OnBoardState extends State<OnBoard> {
                   height: 54,
                   width: 114,
                   decoration: BoxDecoration(
-                    color: Color(0xff85C4E2),
+                    color: Color(0xff265293),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Center(
+                  child:const Center(
                     child: Text(
                       "Next",
                       style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Gilroy',
-                          color: Colors.white),
+                          color: Colors.white
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 50,
-              ),
-              dotPageView()
             ],
           ),
           Column(
             children: [
               SizedBox(
-                height: 60,
+                height: 40,
               ),
               Image.asset(
                 "assets/images/logo2.png",
-                width: 500.0,
-                height: 500.0,
+                width: 400.0,
+                height: 400.0,
               ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
+              const Text(
                 "BMI Calculator",
                 style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Gilroy',
-                    color: Colors.white),
+                    color: Colors.black
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "Body mass index helps you \nknow your health status",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -143,7 +137,7 @@ class _OnBoardState extends State<OnBoard> {
                     fontFamily: 'Gilroy Pro',
                     color: Colors.grey),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               InkWell(
@@ -156,10 +150,10 @@ class _OnBoardState extends State<OnBoard> {
                   height: 56,
                   width: 165,
                   decoration: BoxDecoration(
-                    color: Color(0xff85C4E2),
+                    color: Color(0xff265293),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Center(
+                  child:const Center(
                     child: Text(
                       "Get Started",
                       style: TextStyle(
@@ -171,10 +165,7 @@ class _OnBoardState extends State<OnBoard> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 50,
-              ),
-              dotPageView()
+
             ],
           ),
         ],
