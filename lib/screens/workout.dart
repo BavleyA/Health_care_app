@@ -24,7 +24,7 @@ class Workouts extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 70,
-        backgroundColor:const Color(0xffD3C9E3),
+        backgroundColor:Colors.cyan.shade200,
         centerTitle: true,
         title:const Tab(
           icon: Icon(
@@ -43,9 +43,11 @@ class Workouts extends StatelessWidget {
       ),
       body :ListView.builder(
         itemCount: photo.length,
+
         itemBuilder: (context, index) {
           return ListTile(
             title: Card(
+              color: Colors.cyan.shade50,
               child: Row(
                 children: [
                   Padding(

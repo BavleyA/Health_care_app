@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
+import 'package:heath_care_test/session_manager.dart';
+import 'package:heath_care_test/screens/BMI.dart';
 class sqldb{
 
   static Database? _db ;
@@ -18,7 +20,7 @@ class sqldb{
   initialDb()async{
     String dbPath=await getDatabasesPath();
     String path = join(dbPath,'healthApp.db');
-    Database mydb = await openDatabase(path, onCreate: _onCreate ,version: 1 ,onUpgrade: _onUpgrade);
+    Database mydb = await openDatabase(path, onCreate: _onCreate ,version: 2 ,onUpgrade: _onUpgrade);
     return mydb;
 
   }
@@ -32,11 +34,22 @@ _onCreate(Database db,int version) async{
     Batch batch =db.batch();
     batch.execute('''
     CREATE TABLE "USERS"(
-    user_id INTEGER NOT NULL PRIMARY KEY ,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     user_name TEXT UNIQUE,
     email TEXT NOT NULL UNIQUE,
     user_pass TEXT NOT NULL
+    )
+    ''');
+    batch.execute('''
+    CREATE TABLE "BMIREC"(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_name TEXT,
+        height REAL,
+        weight REAL,
+        bmi REAL,
+        date TEXT,
+        FOREIGN KEY(user_name) REFERENCES USERS(user_name)
     )
     ''');
     print("created");
@@ -50,6 +63,12 @@ getData(String sql ) async{
 
     return response;
 }
+  Future<List<Map<String, dynamic>>> getData1(String query, List<dynamic> args) async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> response = await mydb!.rawQuery(query, args);
+
+    return response;
+  }
 insertData(String sql) async{
     Database? mydb = await db;
     int response = await mydb!.rawInsert(sql);
@@ -85,4 +104,85 @@ insertData(String sql) async{
     var result = await mydb!.rawQuery('SELECT * FROM USERS WHERE USERS.user_name = ?', [Username]);
     return result.isNotEmpty;
   }
+
+  /*Future<List<Map<String, dynamic>>> getAllBMIRecordsForUser(int userId) async {
+    Database? mydb = await db;
+    return await mydb!.query('BMIREC', where: 'userId = ?', whereArgs: [userId]);
+  }*/
+
+
+  Future<int> insertBMIRecord( double height, double weight, double bmi, String date) async {
+    String? userName = SessionManager.username;
+    if (userName == null) {
+      print('Error: User not signed in');
+      return 0;
+    }
+
+    Database? mydb = await db;
+    return await mydb!.insert('BMIREC', {
+      'user_name': userName,
+      'height': height,
+      'weight': weight,
+      'bmi': bmi,
+      'date': date,
+    });
+  }
+
+  Future<List<Map<String, dynamic>>> getAllBMIRecordsForUser() async {
+    String? userName = SessionManager.username;
+    if (userName == null) {
+      print('Error: User not signed in');
+      return [];
+    }
+
+    Database? mydb = await db;
+    return await mydb!.query('BMIREC', where: 'user_name = ?', whereArgs: [userName]);
+  }
+
+  Future<Map<String, dynamic>?> getUserData(String username) async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> result = await mydb!.query('USERS', where: 'user_name = ?', whereArgs: [username]);
+
+    if (result.isNotEmpty) {
+      return result.first;
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  Future<int> updateUserData(String username, String newName, String newEmail) async {
+    Database? mydb = await db;
+    return await mydb!.update(
+      'USERS',
+      {'name': newName, 'email': newEmail},
+      where: 'user_name = ?',
+      whereArgs: [username],
+    );
+  }
+
+
+  Future<int> updatePassword(String username, String oldPassword, String newPassword) async {
+    Database? mydb = await db;
+
+    // Check if the old password is correct
+    var user = await mydb!.query('USERS',
+        where: 'user_name = ? AND user_pass = ?', whereArgs: [username, oldPassword]);
+
+    if (user.isEmpty) {
+      // Old password is incorrect, return an indicator (e.g., -1)
+      return -1;
+    }
+
+    // Old password is correct, proceed with the update
+    return await mydb.update(
+      'USERS',
+      {'user_pass': newPassword},
+      where: 'user_name = ?',
+      whereArgs: [username],
+    );
+  }
+  
+
 }

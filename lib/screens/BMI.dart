@@ -1,22 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:heath_care_test/DBsql.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:heath_care_test/screens/sign_up.dart';
+import 'package:heath_care_test/session_manager.dart';
+import 'package:heath_care_test/screens/records.dart';
 
 class BMI_calculator extends StatefulWidget {
   @override
   State<BMI_calculator> createState() => _BMI_calculatorState();
 }
-
+sqldb sql=sqldb();
 class _BMI_calculatorState extends State<BMI_calculator> {
-  final heightM = TextEditingController();
+  var heightM = TextEditingController();
   final mass = TextEditingController();
   double result = 0, h = 0, m = 0;
+  String UserName="";
+
+
+  void _saveRecord() async {
+    String? userName = SessionManager.username;
+    if (userName != null) {
+      double bmiResult = double.parse((m / (h * h)).toStringAsFixed(1));
+      String currentDate = DateTime.now().toString();
+      int result = await sql.insertBMIRecord(h, m,bmiResult,currentDate);
+
+      if (result > 0) {
+        print('Record saved successfully');
+      } else {
+        print('Error saving record');
+      }
+    }
+  }
+
+  void _getAllRecordsForSignedInUser() async {
+    String? userName = SessionManager.username;
+    if (userName != null) {
+      List<Map<String, dynamic>> records = await sql.getAllBMIRecordsForUser();
+      print('All records for user $userName: $records');
+    }
+  }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 70,
-        backgroundColor: const Color(0xffD3C9E3),
+        backgroundColor:Colors.cyan.shade200,
         centerTitle: true,
         title: const Tab(
           icon: Icon(
@@ -94,7 +124,7 @@ class _BMI_calculatorState extends State<BMI_calculator> {
                 child: TextButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      Color(0xff85C4E2),
+                    Colors.cyan.shade200,
                     ),
                   ),
                   onPressed: () {
@@ -102,6 +132,7 @@ class _BMI_calculatorState extends State<BMI_calculator> {
                       h = double.parse(heightM.text);
                       m = double.parse(mass.text);
                       result = double.parse((m / (h * h)).toStringAsFixed(1));
+                      _saveRecord();
                       if (h > 3) {
                         showDialog(
                           context: context,
@@ -164,9 +195,49 @@ class _BMI_calculatorState extends State<BMI_calculator> {
                     ),
                   ),
                 ),
+
               ),
             ),
           ),
+
+          Padding(
+            padding: EdgeInsets.only(top: 50),
+            child: SizedBox(
+              height: 50.0,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 150),
+                child: ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+                    //minimumSize: Size.fromWidth(100),
+                    backgroundColor: Colors.cyan.shade200,
+                  ),
+                  onPressed: () {
+                    /*_getAllRecordsForSignedInUser();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => bmirecords()),);*/
+                    setState(() {
+                        _getAllRecordsForSignedInUser();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => bmirecords()),);
+                    });
+                  },
+                  child: Text(
+                    "Get my records",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+
+              ),
+            ),
+          ),
+
+
           SizedBox(
             height: 10,
           ),

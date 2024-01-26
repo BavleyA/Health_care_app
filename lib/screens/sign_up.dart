@@ -76,13 +76,17 @@ bool x=false;
       },
     );
   }
+
+  String actual="";
    _submit() async {
      final valid = _formkey.currentState!.validate();
 
      if (valid) {
        _formkey.currentState!.save();
        log(emailcon.text);
+       log(usrnamecon.text);
        log(passcon.text);
+       actual=usrnamecon.text;
        int res = await sql.insertData("INSERT INTO 'USERS' ('name','user_name','email','user_pass') VALUES ('${namecon.text}','${usrnamecon.text}','${emailcon.text}','${passcon.text}')");
        if (res > 0) {
          print(res);
@@ -180,11 +184,11 @@ bool x=false;
                               color: Colors.cyan.shade700,
                             ),
                             filled: true,
-                            fillColor: Color(0x20ffffff),
+                            fillColor: Colors.grey.shade100,
                             focusColor: Colors.red,
                           ),
                           validator: (value) {
-                            if (value == null || value.trim().isEmpty || value.trim().length < 5 ) {
+                            if (value == null || value.trim().isEmpty || value.trim().length < 2 ) {
                               return 'enter valid name';
                             }
                             return null;
@@ -238,11 +242,11 @@ bool x=false;
                               color: Colors.cyan.shade700,
                             ),
                             filled: true,
-                            fillColor: Color(0x20ffffff),
+                            fillColor: Colors.grey.shade100,
                             focusColor: Colors.red,
                           ),
                           validator: (value) {
-                            if (value == null || value.trim().isEmpty || value.trim().length < 3 ) {
+                            if (value == null || value.trim().isEmpty || value.trim().length < 2 ) {
                               return 'user name must be more than 3 characters';
                             }
                             return null;
@@ -297,7 +301,7 @@ bool x=false;
                               color: Colors.cyan.shade700,
                             ),
                             filled: true,
-                            fillColor: Color(0x20ffffff),
+                            fillColor: Colors.grey.shade100,
                             focusColor: Colors.red,
                           ),
                           validator: (value) {
@@ -363,7 +367,7 @@ bool x=false;
                               color: Colors.cyan.shade700,
                             ),
                             filled: true,
-                            fillColor: Color(0x20ffffff),
+                            fillColor: Colors.grey.shade100,
                             focusColor: Colors.red,
                           ),
                           validator: (value) {
@@ -428,7 +432,7 @@ bool x=false;
                               color: Colors.cyan.shade700,
                             ),
                             filled: true,
-                            fillColor: Color(0x20ffffff),
+                            fillColor: Colors.grey.shade100,
                             focusColor: Colors.red,
                           ),
                           validator: (value) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heath_care_test/screens/login_page.dart';
 class Health_Tips extends StatelessWidget {
   List<String> tips = [
     '1. Measure and Watch Your Weight',
@@ -12,10 +13,11 @@ class Health_Tips extends StatelessWidget {
   ];
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 70,
-        backgroundColor:const Color(0xffD3C9E3),
+        backgroundColor:Colors.cyan.shade200,
         centerTitle: true,
         title:const Tab(
           icon: Icon(
@@ -39,6 +41,7 @@ class Health_Tips extends StatelessWidget {
             title: Text(
               tips[index],
               style: TextStyle(
+
                   fontSize: 20,
                   color: Colors.black,
                   fontFamily: "Lora"

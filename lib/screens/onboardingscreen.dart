@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:heath_care_test/screens/login_page.dart';
 
+import 'package:heath_care_test/screens/home.dart';
+
 class OnBoard extends StatefulWidget {
   State<OnBoard> createState() => _OnBoardState();
 }
+
 class _OnBoardState extends State<OnBoard> {
   Widget dotPageView() {
     return Builder(builder: ((context) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          for (int i = 0; i < 2; i++)
+          for (int i = 0; i < 3; i++)
             Container(
               margin: EdgeInsets.symmetric(horizontal: 7),
               width: i == pagenumber ? 25 : 6,
               height: 6,
               decoration: BoxDecoration(
                   color: i == pagenumber ? Colors.white : Colors.grey,
-                  borderRadius: BorderRadius.circular(50)
-              ),
+                  borderRadius: BorderRadius.circular(50)),
             ),
         ],
       );
@@ -39,40 +41,107 @@ class _OnBoardState extends State<OnBoard> {
         },
         controller: nextpage,
         children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 40,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60),
+                  child: Image.asset(
+                    "assets/images/414-bg.png",
+                    width: 400.0,
+                    height: 400.0,
+                  ),
+                ),
+                Text(
+                  "Health Tips",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Gilroy',
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  'Health Tips Make Your Life Better',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Gilroy Pro',
+                    color: Colors.black38,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                InkWell(
+                  onTap: () {
+                    nextpage.animateToPage(1,
+                        duration: Duration(milliseconds: 700),
+                        curve: Curves.easeIn);
+                  },
+                  child: Container(
+                    height: 54,
+                    width: 114,
+                    decoration: BoxDecoration(
+                      color: Colors.cyan.shade600,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Next",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Gilroy',
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Column(
             children: [
               SizedBox(
                 height: 40,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 60),
+                padding: const EdgeInsets.only(left: 0),
                 child: Image.asset(
-                  "assets/images/414-bg.png",
+                  "assets/images/logo2.png",
                   width: 400.0,
                   height: 400.0,
                 ),
               ),
-
               Text(
-                "Health Tips",
+                "BMI Calculator",
                 style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Gilroy',
-                    color: Colors.black
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Gilroy',
+                  color: Colors.black,
                 ),
               ),
               SizedBox(
                 height: 15,
               ),
               Text(
-                'Health Tips Make Your Life Better',
+                "Body Mass Index Helps You Know Your Health Status",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Gilroy Pro',
-                    color: Colors.black38
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Gilroy Pro',
+                  color: Colors.black38,
                 ),
               ),
               SizedBox(
@@ -80,25 +149,25 @@ class _OnBoardState extends State<OnBoard> {
               ),
               InkWell(
                 onTap: () {
-                  nextpage.animateToPage(1,
+                  nextpage.animateToPage(2,
                       duration: Duration(milliseconds: 700),
                       curve: Curves.easeIn);
                 },
                 child: Container(
-                  height: 54,
-                  width: 114,
+                  height: 56,
+                  width: 165,
                   decoration: BoxDecoration(
-                    color: Color(0xff265293),
+                    color: Colors.cyan.shade600,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child:const Center(
+                  child: const Center(
                     child: Text(
                       "Next",
                       style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Gilroy',
-                          color: Colors.white
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Gilroy',
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -112,32 +181,33 @@ class _OnBoardState extends State<OnBoard> {
                 height: 40,
               ),
               Image.asset(
-                "assets/images/logo2.png",
+                "assets/images/34.png",
                 width: 400.0,
                 height: 400.0,
               ),
-              const Text(
-                "BMI Calculator",
+              Text(
+                "Work Out",
                 style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Gilroy',
-                    color: Colors.black
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Gilroy',
+                  color: Colors.black,
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
-              const Text(
-                "Body mass index helps you \nknow your health status",
+              Text(
+                "Your journey to a healthier you starts with each intentional move.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Gilroy Pro',
-                    color: Colors.grey),
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Gilroy Pro',
+                  color: Colors.grey,
+                ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 30,
               ),
               InkWell(
@@ -150,22 +220,22 @@ class _OnBoardState extends State<OnBoard> {
                   height: 56,
                   width: 165,
                   decoration: BoxDecoration(
-                    color: Color(0xff265293),
+                    color: Colors.cyan.shade600,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child:const Center(
+                  child: const Center(
                     child: Text(
                       "Get Started",
                       style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Gilroy',
-                          color: Colors.white),
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Gilroy',
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-
             ],
           ),
         ],
