@@ -36,14 +36,6 @@ A **Health Care App** built with **Flutter** that helps users stay fit and healt
 
 ---
 
-## 📸 Screenshots
-
-| **Login & Signup** | **Home Screen** | **BMI Calculator** |  
-|--------------------|-----------------|--------------------|  
-| ![Login](link-to-login-screenshot) | ![Home](link-to-home-screenshot) | ![BMI](link-to-bmi-screenshot) |
-
----
-
 ## 🛠️ Tech Stack
 
 - **Flutter**: UI framework for cross-platform mobile apps.
