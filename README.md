@@ -1,16 +1,68 @@
-# heath_care_test
+# 🏥 Health Care App
 
-A new Flutter project.
+A **Health Care App** built with **Flutter** that helps users stay fit and healthy. The app offers **health tips**, **exercises**, and a **BMI Calculator** to track progress. User data is stored using **SQLite** via `sqflite` to ensure persistence. The app also includes **login and signup** functionality with **strong validation** for better security.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Features
 
-A few resources to get you started if this is your first Flutter project:
+### 1. **User Management**
+- **Login & Signup** with strong validation (e.g., email format, password strength).
+- **Data storage** using SQLite (sqflite) to save user profile and health progress.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 2. **BMI Calculator**
+- Calculate **BMI** based on weight and height.
+- Track BMI history to monitor progress over time.
+- Displays BMI category: **Underweight**, **Normal**, **Overweight**, **Obese**.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 3. **Health Tips**
+- Daily tips to promote a **healthy lifestyle** (e.g., nutrition, hydration, sleep).
+- Tips categorized by areas (e.g., mental health, physical fitness).
+
+### 4. **Exercise Library**
+- List of **exercises** with detailed instructions.
+- Exercises targeting **different muscle groups** (e.g., cardio, strength training, flexibility).
+- Track completed exercises.
+
+---
+
+## 🎯 How it Works
+
+1. **Signup/Login** to create or access your account.
+2. Explore **daily health tips** and recommended **exercises**.
+3. Use the **BMI Calculator** to check your fitness level.
+4. Save your BMI history and track **progress over time**.
+5. Complete exercises and mark them as done to maintain your fitness routine.
+
+---
+
+## 📸 Screenshots
+
+| **Login & Signup** | **Home Screen** | **BMI Calculator** |  
+|--------------------|-----------------|--------------------|  
+| ![Login](link-to-login-screenshot) | ![Home](link-to-home-screenshot) | ![BMI](link-to-bmi-screenshot) |
+
+---
+
+## 🛠️ Tech Stack
+
+- **Flutter**: UI framework for cross-platform mobile apps.
+- **Dart**: Programming language used with Flutter.
+- **sqflite**: SQLite plugin for local database management.
+- **Material Design**: Ensures consistent and modern UI/UX.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Flutter SDK** installed. [Installation Guide](https://flutter.dev/docs/get-started/install)
+- **Dart** enabled in your code editor (VSCode, Android Studio).
+- Device emulator or physical device for testing.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/health-care-app.git
