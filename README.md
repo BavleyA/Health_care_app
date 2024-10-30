@@ -1,5 +1,7 @@
 # 🏥 Health Care App
 
+## 📱 OverView
+
 A **Health Care App** built with **Flutter** that helps users stay fit and healthy. The app offers **health tips**, **exercises**, and a **BMI Calculator** to track progress. User data is stored using **SQLite** via `sqflite` to ensure persistence. The app also includes **login and signup** functionality with **strong validation** for better security.
 
 ---
